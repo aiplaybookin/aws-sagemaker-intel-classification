@@ -188,7 +188,7 @@ def train(model, datamodule, sm_training_env):
     
     # save eval metrics in json file
     trainer.test(model, datamodule)
-    eval_metrics = {key: value.tolist() for key, value in trainer.callback_metrics.items()}
+    eval_metrics = { key: value.tolist() for key, value in trainer.callback_metrics.items() }
     print(eval_metrics)
     with open((sm_model_dir / "eval_metrics.json"), "w") as outfile:
         json.dump(eval_metrics, outfile)
