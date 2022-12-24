@@ -18,7 +18,14 @@ NOTE : Using pipeline is in different repo.
 6. Run ```deployAndPredict``` notebook
 
 7. Save JSON file in ```SM_MODEL_DIR``` directory
-<img src="readme-images/evalJSON.png" />
+```
+# save eval metrics in json file
+    trainer.test(model, datamodule)
+    eval_metrics = { k : v.tolist() for k, v in trainer.callback_metrics.items() }
+    print(eval_metrics)
+    with open((sm_model_dir/"eval_metrics.json"), "w") as jfile:
+        json.dump(eval_metrics, jfile)
+```
 
 8. Check Cloud Watch logs
 <img src="readme-images/cloudwatch.png" />
